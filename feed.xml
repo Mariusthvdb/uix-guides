@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2026-02-25T08:22:31+00:00</updated><id>/feed.xml</id><title type="html">UI eXtension Guides</title><subtitle>Guides for UI eXtension (UIX).</subtitle><author><name>Lint-Free-Technology</name></author><entry><title type="html">ha-icon-button changes for 2026.3</title><link href="/elements/2026/02/25/ha-icon-button.html" rel="alternate" type="text/html" title="ha-icon-button changes for 2026.3" /><published>2026-02-25T00:00:00+00:00</published><updated>2026-02-25T00:00:00+00:00</updated><id>/elements/2026/02/25/ha-icon-button</id><content type="html" xml:base="/elements/2026/02/25/ha-icon-button.html"><![CDATA[<p>Home Assistant 2026.3 changes <code class="language-plaintext highlighter-rouge">ha-icon-button</code> from using mdc button to webawesome (<code class="language-plaintext highlighter-rouge">ha-button</code>). This means that all uses of <code class="language-plaintext highlighter-rouge">--mdc-icon-button-size</code> need to change to <code class="language-plaintext highlighter-rouge">--ha-icon-button-size</code>.</p>
+
+<p>The example below changes the default size of the picture-glance entity button icon from 40px to 70px. The icon color is changed to yellow for example effect only.</p>
+
+<p>UIX mods required:</p>
+
+<ul>
+  <li>Change <code class="language-plaintext highlighter-rouge">--ha-icon-button-size</code> to 70px from default of 40px.</li>
+  <li>Change <code class="language-plaintext highlighter-rouge">--mdc-icon-size</code> to 54px from default of 24px.</li>
+  <li>Change icon button wrapper width to 70px from default of 40px.</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s">picture-glance</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Kitchen</span>
+<span class="na">image</span><span class="pi">:</span> <span class="s">https://demo.home-assistant.io/stub_config/kitchen.png</span>
+<span class="na">entities</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">entity</span><span class="pi">:</span> <span class="s">light.kitchen_lights</span>
+<span class="na">uix</span><span class="pi">:</span>
+  <span class="na">style</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">.wrapper {</span>
+      <span class="s">width: 70px;</span>
+    <span class="s">}</span>
+    <span class="s">ha-icon-button {</span>
+      <span class="s">--ha-icon-button-size: 70px;</span>
+      <span class="s">--mdc-icon-size: 54px;</span>
+      <span class="s">color: yellow !important;</span>
+    <span class="s">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/elements/2026-02-25-ha-icon-button.png" alt="example" /></p>]]></content><author><name>Lint-Free-Technology</name></author><category term="elements" /><category term="icon" /><category term="button" /><category term="card" /><category term="picture-glance" /><summary type="html"><![CDATA[Home Assistant 2026.3 changes ha-icon-button from using mdc button to webawesome (ha-button). This means that all uses of --mdc-icon-button-size need to change to --ha-icon-button-size.]]></summary></entry><entry><title type="html">Modifying sidebar menu icon</title><link href="/frontend/2026/02/25/sidebar-menu-icon.html" rel="alternate" type="text/html" title="Modifying sidebar menu icon" /><published>2026-02-25T00:00:00+00:00</published><updated>2026-02-25T00:00:00+00:00</updated><id>/frontend/2026/02/25/sidebar-menu-icon</id><content type="html" xml:base="/frontend/2026/02/25/sidebar-menu-icon.html"><![CDATA[<p>Starting with UIX version <a href="https://github.com/Lint-Free-Technology/uix/releases/tag/v5.1.0">5.1.0</a>, you can now apply <code class="language-plaintext highlighter-rouge">--uix-icon</code> to icons that do not have a parent of <code class="language-plaintext highlighter-rouge">ha-icon</code>. These are often icons which have a set purpose in the Home Assistant interface and are not able to be changed, unless you have UIX.</p>
+
+<p>Generally modifying such icons is accomplish via using UIX in your <a href="https://uix.lf.technology/using/themes/">themes</a>.</p>
+
+<p>The example below changes the sidebar hamburger menu icon to the Home Assistant icon.</p>
+
+<p>Id you are new to Home Assistant themes in general check out the <a href="https://www.home-assistant.io/integrations/frontend/">https://www.home-assistant.io/integrations/frontend/</a>.</p>
+
+<p>If you already have any of the theme keys in your theme as yaml version, e.g. <code class="language-plaintext highlighter-rouge">uix-sidebar-yaml</code>,then you will need to adjust to include the CSS rules in your base element selector <code class="language-plaintext highlighter-rouge">.:</code>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">UIX Test</span><span class="pi">:</span>
+  <span class="na">uix-theme</span><span class="pi">:</span> <span class="s">UIX Test</span>
+  <span class="na">uix-sidebar</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">.menu &gt; ha-icon-button {</span>
+      <span class="s">--uix-icon: hass:home-assistant;</span>
+      <span class="s">--uix-icon-color: var(--primary-color);</span>
+    <span class="s">}</span>
+  <span class="na">uix-top-app-bar-fixed</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">slot[name="navigationIcon"] {</span>
+      <span class="s">--uix-icon: hass:home-assistant;</span>
+      <span class="s">--uix-icon-color: var(--primary-color);</span>
+    <span class="s">}</span>
+  <span class="na">uix-root-yaml</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">.: |</span>
+      <span class="s">ha-menu-button[slot="navigationIcon"] {</span>
+        <span class="s">--uix-icon: hass:home-assistant;</span>
+        <span class="s">--uix-icon-color: var(--primary-color);</span>
+      <span class="s">}</span>
+  <span class="na">uix-profile-yaml</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="s">"* $":</span>
+      <span class="s">hass-tabs-subpage $: |</span>
+        <span class="s">.toolbar.narrow &gt; slot[name="toolbar"] {</span>
+          <span class="s">--uix-icon: hass:home-assistant;</span>
+          <span class="s">--uix-icon-color: var(--primary-color);</span>
+        <span class="s">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/frontend/2026-02-25-sidebar-menu-icon.png" alt="example" /></p>
+
+<p>This has been tested on lovelace dashboard pages, config settings pages, and user profile. There may be additional panels, custom panels where this does not apply. If you have any updates please <a href="/general/2026/02/25/contrubuting-to-uix-guides.html">contribute</a>.</p>]]></content><author><name>Lint-Free-Technology</name></author><category term="frontend" /><category term="sidebar" /><category term="icon" /><summary type="html"><![CDATA[Starting with UIX version 5.1.0, you can now apply --uix-icon to icons that do not have a parent of ha-icon. These are often icons which have a set purpose in the Home Assistant interface and are not able to be changed, unless you have UIX.]]></summary></entry><entry><title type="html">Contributing to UI eXtension guides</title><link href="/general/2026/02/25/contrubuting-to-uix-guides.html" rel="alternate" type="text/html" title="Contributing to UI eXtension guides" /><published>2026-02-25T00:00:00+00:00</published><updated>2026-02-25T00:00:00+00:00</updated><id>/general/2026/02/25/contrubuting-to-uix-guides</id><content type="html" xml:base="/general/2026/02/25/contrubuting-to-uix-guides.html"><![CDATA[<p>Contribution to UI eXtension guides is most welcome. To view your edits locally you will need <a href="https://www.ruby-lang.org/en/">ruby</a> as the site is built with Jekyll. If you don’t have ruby then don’t let that stop you from contributing. Simply follow the guide writing your post in markdown and any suggested edits will be made when you submit your pull request.</p>
+
+<h2 id="creating-a-post">Creating a post</h2>
+
+<p>Fork the repository and either work online in GitHub desktop or in your favorite development environment.</p>
+
+<ul>
+  <li>Create new markdown <code class="language-plaintext highlighter-rouge">.md</code> posts in <code class="language-plaintext highlighter-rouge">_posts/</code> directory in directories of main project directory. These directories become categories. e.g. <code class="language-plaintext highlighter-rouge">elements/_posts</code></li>
+  <li>Name markdown file <code class="language-plaintext highlighter-rouge">YYYY-MM-DD-&lt;descriptive short name&gt;.md</code></li>
+  <li>Save any images to <code class="language-plaintext highlighter-rouge">assets/&lt;category&gt;/YYYY-MM-DD-&lt;descriptive short name&gt;.png</code> and use in post from this location.</li>
+  <li>Follow Jekyll front matter format
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">title:</code></li>
+      <li><code class="language-plaintext highlighter-rouge">excerpt_image:</code> if required</li>
+      <li><code class="language-plaintext highlighter-rouge">tags:</code> list</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Submit a PR against the <code class="language-plaintext highlighter-rouge">contrib</code> branch.</p>
+
+<h2 id="setup-for-local-development">Setup for local development</h2>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<ul>
+  <li>Ruby (3.4.8)</li>
+  <li>Bundler</li>
+  <li>
+    <p>Git</p>
+
+    <p><em>GitHub action uses Ruby 3.4.8. If you use MacOS/Linux you can use rbenv to manage your ruby installs. Repo has <code class="language-plaintext highlighter-rouge">.ruby-version</code> file set to 3.4.8</em></p>
+  </li>
+</ul>
+
+<h3 id="build-steps">Build steps</h3>
+
+<ol>
+  <li>
+    <p>Clone the repository:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Lint-Free-Technology/uix-guides.git
+<span class="nb">cd </span>uix-guides
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Install dependencies:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">install</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Run the local server:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Visit <code class="language-plaintext highlighter-rouge">http://localhost:4000</code> in your browser</p>
+  </li>
+</ol>]]></content><author><name>Lint-Free-Technology</name></author><category term="general" /><category term="community" /><summary type="html"><![CDATA[Contribution to UI eXtension guides is most welcome. To view your edits locally you will need ruby as the site is built with Jekyll. If you don’t have ruby then don’t let that stop you from contributing. Simply follow the guide writing your post in markdown and any suggested edits will be made when you submit your pull request.]]></summary></entry></feed>
